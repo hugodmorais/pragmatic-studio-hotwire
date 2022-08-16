@@ -2,6 +2,6 @@
   <%= render "tackle_box_items/stats", fish_catches: @fish_catches %>
 <% end %>
 
-<%= turbo_stream.remove @fish_catch %>
+<%= turbo_stream.replace @fish_catch, @fish_catch %>
 
 <%= render_flash_stream %>

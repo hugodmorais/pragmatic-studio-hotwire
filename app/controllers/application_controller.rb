@@ -1,10 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
 
-  def render_flash_stream
-    turbo_stream.update "flash", partial: "layouts/flash"
-  end
-
 private
 
   def require_signin
