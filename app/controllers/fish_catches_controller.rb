@@ -5,7 +5,8 @@ class FishCatchesController < ApplicationController
   def index
     @pagy, @fish_catches =
       pagy(current_user.filter_catches(params),
-           items: params[:per_page] ||= 5)
+           items: params[:per_page] ||= 5,
+           link_extra: 'data-turbo-action="advance"')
 
     @bait_names = Bait.pluck(:name)
     @species = FishCatch::SPECIES
@@ -20,7 +21,7 @@ class FishCatchesController < ApplicationController
   def update
     if @fish_catch.update(fish_catch_params)
       @fish_catches = fish_catches_for_bait(@fish_catch.bait)
-      
+
       flash.now[:notice] = "Catch successfully updated."
     else
       render :edit, status: :unprocessable_entity
